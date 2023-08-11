@@ -1,46 +1,49 @@
 [
   {
     "kernelSource": {
-      "name": "samsung_KernelSU",
+      "name": "samsung_kernel_ksu",
       "repo": "https://github.com/shandongtlb/kernel_samsung_sm8350_S21U",
       "branch": "VK9",
       "device": "p3q",
       "defconfig": "vendor/p3q_chn_openx_defconfig"
     },
-    "withKernelSU": false,
+    "withKernelSU": true,
     "toolchains": [
-      {
-        "repo": "https://github.com/kdrag0n/proton-clang",
-        "branch": "master",
-        "name": "proton-clang",
-        "binPath": ["./bin"]
-      }
+  {
+    "repo": "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/",
+    "branch": "android-10.0.0_r32",
+    "name": "gcc",
+    "binPath": ["bin"]
+  },
+  {
+    "repo": "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/",
+    "branch": "android-10.0.0_r32",
+    "name": "gcc64",
+    "binPath": ["bin"]
+  },
+  {
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/a71fa4c09d7109d611ee63964fc9fca58fee38cd/clang-r450784d.tar.gz",
+    "name": "clang",
+    "binPath": ["bin"]
+  }
     ],
     "ccache": true,
     "params": {
       "ARCH": "arm64",
-      "CC": "proton-clang/bin/clang",
+      "CC": "clang",
       "externalCommand": {
-        "CROSS_COMPILE": "proton-clang/bin/aarch64-linux-gnu-",
-        "CROSS_COMPILE_ARM32": "proton-clang/bin/arm-linux-gnueabi-",
-        "LD": "proton-clang/bin/ld.lld",
-        "AR": "proton-clang/bin/llvm-ar",
-        "NM": "proton-clang/bin/llvm-nm",
-        "OBJCOPY": "proton-clang/bin/llvm-objcopy",
-        "OBJDUMP": "proton-clang/bin/llvm-objdump",
-        "READELF": "proton-clang/bin/llvm-readelf",
-        "OBJSIZE": "proton-clang/bin/llvm-size",
-        "STRIP": "proton-clang/bin/llvm-strip",
-        "LDGOLD": "proton-clang/bin/aarch64-linux-gnu-ld.gold",
-        "LLVM_AR": "proton-clang/bin/llvm-ar",
-        "LLVM_DIS": "proton-clang/bin/llvm-dis"
+        "CROSS_COMPILE": "gcc64/aarch64-linux-android-",
+        "CROSS_COMPILE_ARM32": "gcc/arm-linux-androideabi-",
+        "CLANG_TRIPLE": "aarch64-linux-gnu-",
+        "LLVM_IAS": "1",
+        "LLVM": "1"
       }
     },
     "AnyKernel3": {
-      "use": false,
-      "release": false,
-      "repo": "https://github.com/easterNday/AnyKernel3/",
-      "branch": "thyme"
+      "use": true,
+      "release": true,
+      "repo": "https://github.com/yexun1995/AnyKernel3",
+      "branch": "master"
     }
   }
 ]
